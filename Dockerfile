@@ -30,7 +30,7 @@ RUN npm ci --only=production
 COPY --from=builder /app/dist ./dist
 
 # 暴露 Cloud Run 将要使用的端口
-EXPOSE 8080
+EXPOSE 18080
 
 # 最终的启动命令：用 node 直接运行编译后的 JS 文件
 # 确保你的主文件是 server.js
