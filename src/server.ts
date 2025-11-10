@@ -12,7 +12,7 @@ import ngeohash from 'ngeohash';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 8080;
 
 // 从环境变量中获取敏感信息
 const TICKETMASTER_API_KEY = process.env.TICKETMASTER_API_KEY;
