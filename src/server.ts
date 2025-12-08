@@ -50,6 +50,7 @@ const FavoriteSchema = new mongoose.Schema({
   category: { type: String },
   venue: { type: String },
   image: { type: String },
+  favoritedAt: { type: Number},
 });
 
   // _id:string;
@@ -89,6 +90,8 @@ app.get('/api/suggest', async (req: Request, res: Response) => {
     const response = await axios.get(url);
     const result = response.data._embedded;
     const events = result.events;
+    console.log(events);
+    
     return res.json(events);
   } catch (error) {
     console.error('获取建议失败:', error);
@@ -203,6 +206,8 @@ app.get('/api/events/:id', async (req: Request, res: Response) => {
 app.get('/api/favorites', async (req: Request, res: Response) => {
   try {
     const favorites = await Favorite.find();
+    console.log(favorites);
+    
     res.json(favorites);
   } catch (error) {
     console.error('获取收藏列表失败:', error);
@@ -253,7 +258,7 @@ app.delete('/api/favorites/:id', async (req: Request, res: Response) => {
     const result = await Favorite.findOneAndDelete({ id });
 
     if (!result) {
-      return res.status(404).json({ message: '在收藏夹中未找到该事件' });
+      return res.status(500).json({ message: '在收藏夹中未找到该事件' });
     }
 
     res.status(204).send(); // 204 No Content
